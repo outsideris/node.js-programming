@@ -40,5 +40,13 @@ app.get('/join', function(req, res) {
   });
 });
 
+app.post('/join', function(req, res) {
+  res.render('join-result', {
+    username: req.body.name,
+    useremail: req.body.email,
+    title: 'Express'
+  });
+});
+
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
