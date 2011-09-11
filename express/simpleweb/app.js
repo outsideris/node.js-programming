@@ -28,25 +28,7 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', function(req, res){
-  res.render('index', {
-    title: 'Express'
-  });
-});
-
-app.get('/join', function(req, res) {
-  res.render('join-form', {
-    title: 'Express'
-  });
-});
-
-app.post('/join', function(req, res) {
-  res.render('join-result', {
-    username: req.body.name,
-    useremail: req.body.email,
-    title: 'Express'
-  });
-});
+app = require('./routes')(app);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
