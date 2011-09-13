@@ -1,3 +1,5 @@
+var repo = require('./repository');
+
 module.exports = function(app) {
   app.get('/', function(req, res){
     res.render('index', {
@@ -12,11 +14,8 @@ module.exports = function(app) {
   });
 
   app.post('/join', function(req, res) {
-    res.render('join-result', {
-      username: req.body.name,
-      useremail: req.body.email,
-      title: 'Express'
-    });
+    repo.insertUser(req.body);
+    repo.findUserByName(req.body.name, res);
   });
 
   return app;
