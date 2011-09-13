@@ -25,10 +25,30 @@ var mysqlutil = module.exports = {
         throw err; 
       } 
       res.render('join-result', {
-        username: results[0].name,
-        useremail: results[0].email,
-        title: 'Express'
+        username: results[0].name
+      , useremail: results[0].email
+      , title: 'Express'
+      , joinSuccess: true
       });
+    });
+  }
+, hasNameAndEmail: function(user, res) {
+    client.query(
+      'SELECT * FROM ' + TABLE + ' WHERE name = ? OR email = ?'
+    , [user.name, user.email]
+    , function(err, results, fields) {
+      if (err) {
+        throw err;
+      }
+      if (results.length > 0) {
+        res.render('join-result', {
+          title: 'Express'
+        , joinSuccess: false
+        });
+      } else {
+        mysqlutil.insertUser(user);
+        mysqlutil.findUserByName(user.name, res);
+      }
     });
   }
 };

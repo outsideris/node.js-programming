@@ -14,8 +14,7 @@ module.exports = function(app) {
   });
 
   app.post('/join', function(req, res) {
-    repo.insertUser(req.body);
-    repo.findUserByName(req.body.name, res);
+    repo.hasNameAndEmail(req.body, res);
   });
 
   return app;
