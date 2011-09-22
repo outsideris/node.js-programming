@@ -18,7 +18,6 @@
     input(type='text', style='width:300px;')#message
     input(type='submit', value='보내기')
 
-  include commonScript
   script
     $(document).ready(function() {
       var room = io.connect('/room'); 
