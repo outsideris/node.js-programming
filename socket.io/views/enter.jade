@@ -1,0 +1,24 @@
+- if (isSuccess)
+  h2 채팅방 목록
+  p #{nickname}님 환영합니다.
+  p 원하는 채팅방이 없으면 채팅방을 만드세요.
+    form(action='/makeRoom', method='POST')
+      label(for='roomname') 방제
+      input(type='text', id='roomname', name='roomname')
+      input(type='submit', value='방 만들기')
+  ul
+    each room in roomList
+      li= room
+        a(href='/join/' + room)
+          input(type='button', value='입장');
+- else
+  include commonScript
+  
+  - if (nickname === '')
+    script(type='text/javascript')
+      alert('잘못된 닉네임입니다.');
+      history.go(-1);
+  - else
+    script(type='text/javascript')
+      alert('사용중인 닉네임입니다.');
+      history.go(-1);

@@ -1,0 +1,69 @@
+- if (!isSuccess)
+  script
+    alert('방에 입장할 수 없습니다.');
+    location.href = '/enter';
+- else
+  h3 방제 : 
+    span#roomName= roomName 
+  input(type='button', value='나가기')#leave
+  #chatWindow(style='width:400px; height:400px; overflow:auto; border:1px solid #000; float:left; margin-right:10px;')
+    
+  div(style='width:100px; height:400px; overflow:auto; border:1px solid #000;')
+    p 참가자
+    ul#attendants
+      each attendant in attendants
+        li(id='attendant-'+attendant)= attendant 
+  form
+    span#myName #{nickName}
+    input(type='text', style='width:300px;')#message
+    input(type='submit', value='보내기')
+
+  include commonScript
+  script
+    $(document).ready(function() {
+      var room = io.connect('/room'); 
+      var chatWindow = $('#chatWindow');
+      var messageBox = $('#message');
+      var myName = $('#myName').text();
+      var attendants = $('#attendants');
+      var showMessage = function(msg) {
+        chatWindow.append($('<p>').text(msg));     
+        chatWindow.scrollTop(chatWindow.height());
+      };
+
+      room.on('connect', function() {
+        room.emit('join', {roomName:$('#roomName').text(), nickName:myName}); 
+      });
+
+      room.on('joined', function(data) {
+        if(data.isSuccess) {
+          showMessage(data.nickName + '님이 입장하셨습니다.');
+          attendants.append($('<li>').attr('id', 'attendant-'+data.nickName).text(data.nickName)); 
+        }
+      });
+
+      room.on('message', function(data) {
+        showMessage(data.nickName + ' : ' + data.msg); 
+      });
+
+      room.on('leaved', function(data) {
+        showMessage(data.nickName + '님이 나가셨습니다.');
+        $('#attendant-'+data.nickName).remove();
+      });
+
+      $('form').submit(function(e) {
+        e.preventDefault();
+        var msg = messageBox.val();
+        if ($.trim(msg) !== '') {
+          showMessage(myName + ' : ' + msg);
+          room.json.send({nickName:myName, msg:msg});
+          messageBox.val('');
+        }
+      });
+
+      $('#leave').click(function(e) {
+        room.emit('leave', {nickName:myName});
+        location.href = '/enter';
+      });
+    });
+ 
