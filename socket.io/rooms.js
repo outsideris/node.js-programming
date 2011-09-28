@@ -38,7 +38,6 @@ module.exports = function(app) {
       });
 
       socket.on('leave', function(data) {
-        console.log('emitted leave event');
         if (joinedRoom) {
           Chat.leaveRoom(joinedRoom, data.nickName);
           socket.broadcast.to(joinedRoom).json.emit('leaved', {nickName:data.nickName});

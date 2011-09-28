@@ -31,8 +31,7 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', function(req, res){
-  res.render('index', {
-  });
+  res.render('index');
 });
 
 app.post('/enter', function(req, res) {
@@ -106,6 +105,6 @@ app.get('/join/:id', function(req, res) {
 app.listen(3000);
 
 // Socket.io
-require('./socket.io')(app);
+require('./rooms')(app);
 
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
