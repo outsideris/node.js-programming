@@ -4,7 +4,6 @@ module.exports = function(app) {
   var io = require('socket.io').listen(app);
   
   io.configure(function(){
-    io.enable('browser client etag');
     io.set('log level', 3);
     io.set('transports', [
       'websocket'
