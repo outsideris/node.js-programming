@@ -56,6 +56,11 @@ io.sockets.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('Good-bye'); 
   });
+
+  socket.on('message', function(msg) {
+    console.log(msg);
+    socket.emit('message', '반갑습니다.');
+  });
 });
 
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
