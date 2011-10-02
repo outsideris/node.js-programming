@@ -1,0 +1,27 @@
+#contents(style='width:300px; height:200px; overflow:auto; border:1px solid #000;')
+
+script(type='text/javascript')
+  window.onload = function() {
+    var socket = io.connect('http://localhost:3000');  
+    socket.on('connect', function() {
+      printMessage('연결되었습니다.');
+      socket.emit('message', '안녕하세요.');
+    });
+
+    socket.on('message', function(msg) {
+      printMessage(msg);
+      socket.emit('from client', {text:'클라이언트에서 보낸 메세지입니다.'});
+    });
+
+    socket.on('from server', function(data) {
+      printMessage(data.text);
+    });
+  };
+
+  var contents = document.getElementById('contents');
+  function printMessage(msg) {
+    var p = document.createElement("p");
+    p.textContent = msg;
+    contents.appendChild(p)
+  }
+
