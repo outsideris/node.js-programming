@@ -52,14 +52,17 @@ io.sockets.on('connection', function(socket) {
 
   socket.on('message', function(msg) {
     console.log(msg);
-    socket.emit('message', '반갑습니다.');
+    socket.send('서버쪽 메세지 테스트');
+  });
+
+  socket.send('send로 보내는 메세지', function() {
+    console.log('메시지가 전달되었습니다.');
   });
 
   socket.on('from client', function(data) {
     console.log(data.text);
-    socket.emit('from server', {text:'서버에서 보낸 메세지'});
+    socket.emit('from server', {text:'서버에서 보낸 emit'});
   });
-
 });
 
 console.log("서버가 시작되었습니다. http://localhost:3000");

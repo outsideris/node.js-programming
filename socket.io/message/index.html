@@ -13,7 +13,11 @@
         var socket = io.connect('http://localhost:3000');  
         socket.on('connect', function() {
           printMessage('연결되었습니다.');
-          socket.emit('message', '안녕하세요.');
+          socket.send('클라이언트 message 테스트');
+        });
+
+        socket.send('send로 보내는 메시지', function() {
+            printMessage('메세지가 전달되었습니다.');
         });
 
         socket.on('message', function(msg) {
