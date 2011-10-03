@@ -49,6 +49,17 @@ io.sockets.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('Good-bye'); 
   });
+
+  socket.on('message', function(msg) {
+    console.log(msg);
+    socket.emit('message', '반갑습니다.');
+  });
+
+  socket.on('from client', function(data) {
+    console.log(data.text);
+    socket.emit('from server', {text:'서버에서 보낸 메세지'});
+  });
+
 });
 
 console.log("서버가 시작되었습니다. http://localhost:3000");

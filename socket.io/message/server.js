@@ -57,5 +57,4 @@ io.sockets.on('connection', function(socket) {
 
 });
 
-
 console.log("서버가 시작되었습니다. http://localhost:3000");
