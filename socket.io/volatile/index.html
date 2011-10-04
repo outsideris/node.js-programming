@@ -31,6 +31,10 @@
           callback('정상적으로 이벤트를 받았습니다.');
         });
 
+        socket.on('as volatile', function(time) {
+          printMessage(time);
+        });
+
         var contents = document.getElementById('contents');
         function printMessage(msg) {
           var p = document.createElement("p");

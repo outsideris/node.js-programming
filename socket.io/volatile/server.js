@@ -65,6 +65,14 @@ io.sockets.on('connection', function(socket) {
       console.log('from server 이벤트:' + res); 
     });
   });
+
+  var timer = setInterval(function() {
+     socket.volatile.emit('as volatile', new Date()); 
+  }, 2000);
+
+  setTimeout(function() {
+    clearInterval(timer);
+  }, 10000);
 });
 
 console.log("서버가 시작되었습니다. http://localhost:3000");
