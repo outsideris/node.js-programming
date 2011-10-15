@@ -3,65 +3,49 @@ var rest = require('restler')
   , schedule = require('node-schedule');
 
 var Tweet = {
-  sinceId: '1' 
-, getTweets: function(search, callback) {
-    search = encodeURIComponent(search);
+    sinceId: '1' 
+  , isOpened: false
+  , getTweets: function(search, callback) {
+      search = encodeURIComponent(search);
     
-    var setting = {
-      resultType: 'recent'
-    , rpp: 100
-    };
+      fs.readFile('./maxid.txt', function(err, maxId) {
+        if (err) { Tweet.sinceId = 1; }
+        else { Tweet.sinceId = maxId; }
 
-    rest.get(
-      'http://search.twitter.com/search.json?q=' + search +
-      '&result_type=' + setting.result_type +
-      '&rpp=' + setting.rpp +
-      '&since_id=' + this.sinceId
-    ).on('complete', function(data) {
-        callback(data);
-    });
-  }
-, setSinceId: function(id) {
-    this.sinceId = id;
-  }
+        rest.get(
+          'http://search.twitter.com/search.json?q=' + search +
+          '&result_type=recent' +
+          '&rpp=100' +
+          '&since_id=' + this.sinceId
+        ).on('complete', function(data) {
+          var text = "";
+          data.results.forEach(function(elem, index, array) {
+            text += elem.from_user + ': ' + elem.text + ' at' + elem.created_at + '\n';
+          });
+
+          if (!Tweet.isOpened) {
+            fs.open('./tweets.txt', 'a', 0666, function(err, fd) {
+              if(err) { throw err; }
+              isOpened = true;
+              fs.write(fd, new Buffer(text), null, null, null, function(err) {
+                fs.close(fd, function() {
+                  Tweet.isOpened = false; 
+                  fs.writeFile('./maxid.txt', data.max_id.toString(), function(err) {});
+                }); 
+              });
+            });
+          }
+        });
+      });
+    }
 }
 
-var FileManager = function() {
-  var isOpened = false;
-
-  fs.readFile('./maxid.txt', function(err, data) {
-    if (err) { Tweet.setSinceId(1); }
-
-    Tweet.setSinceId(data);
-
-    Tweet.getTweets('#love', function(data) {
-      var text = "";
-      data.results.forEach(function(elem, index, array) {
-        text += elem.from_user + ': ' + elem.text + ' at' + elem.created_at + '\n';
-      });
-
-      if (!isOpened) {
-        fs.open('./tweets.txt', 'a', 0666, function(err, fd) {
-          if(err) { throw err; }
-          isOpened = true;
-          fs.write(fd, new Buffer(text), null, null, null, function(err) {
-            fs.close(fd, function() {
-              isOpened = false; 
-              fs.writeFile('./maxid.txt', data.max_id.toString(), function(err) {});
-            }); 
-          });
-        });
-      }
-    });
-  });
-};
-
-
 var rule = new schedule.RecurrenceRule();
-rule.hour = 2;
-//rule.minute = 42;
+rule.hour = new schedule.Range(0, 23);
+rule.minute = [0, 10, 20, 30, 40, 50];
 
 var j = schedule.scheduleJob(rule, function(){
-      console.log('The world is going to end today.' + new Date());
+  Tweet.getTweets('#nodejs');
+  console.log('Backup is completed at ' + new Date());
 });
 
