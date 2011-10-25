@@ -1,0 +1,15 @@
+{
+  "author": "",
+  "name": "simple-vows",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "engines": {
+    "node": "~0.4.12"
+  },
+  "dependencies": {
+    "vows": "~0.5.11"
+  },
+  "devDependencies": {}
+}
