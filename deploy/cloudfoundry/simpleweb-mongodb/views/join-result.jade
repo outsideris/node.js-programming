@@ -1,0 +1,11 @@
+- if (joinSuccess)
+  h3 회원가입완료
+  p 가입한 회원 정보는 아래와 같습니다.
+  div
+    ul
+      li 이름 : #{username}
+      li 이메일 : #{useremail}
+- else
+  h3 회원가입 오류
+  p 이미 가입된 이름 또는 이메일입니다.
+  a(href='/join') 회원 가입페이지로 돌아가기
