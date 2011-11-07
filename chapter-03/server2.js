@@ -1,9 +1,7 @@
+// 리스트 3.6
 var server = require('http');
     
 server.createServer(function(req, res) {
   res.writeHead(200, {'Content-Type':'text/plain'});
-  setTimeout(function() {
-    res.end('World\n');
-  },2000);
-  res.write('Hello\n');
+  res.end('Hello World\n');
 }).listen(3000);
