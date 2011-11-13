@@ -47,23 +47,23 @@ app.post('/enter', function(req, res) {
   }
 
   res.render('enter', {
-    isSuccess: isSuccess 
-  , nickname: nickname
-  , roomList: Chat.getRoomList()
+      isSuccess: isSuccess 
+    , nickname: nickname
+    , roomList: Chat.getRoomList()
   });
 });
 
 app.get('/enter', function(req, res) {
   if (req.session.nickname) {
     res.render('enter', {
-      isSuccess: true 
-    , nickname: req.session.nickname
-    , roomList: Chat.getRoomList()
+        isSuccess: true 
+      , nickname: req.session.nickname
+      , roomList: Chat.getRoomList()
     });
   } else { 
     res.render('enter', {
-      isSuccess: false 
-    , nickname: ''
+        isSuccess: false 
+      , nickname: ''
     });
 
   }
@@ -81,8 +81,8 @@ app.post('/makeRoom', function(req, res) {
   }
 
   res.render('makeRoom', {
-    isSuccess: isSuccess
-  , roomName: roomName
+      isSuccess: isSuccess
+    , roomName: roomName
   });
 });
 
@@ -95,10 +95,10 @@ app.get('/join/:id', function(req, res) {
   }
 
   res.render('room', {
-    isSuccess: isSuccess
-  , roomName: roomName
-  , nickName: req.session.nickname
-  , attendants: Chat.getAttendantsList(roomName)
+      isSuccess: isSuccess
+    , roomName: roomName
+    , nickName: req.session.nickname
+    , attendants: Chat.getAttendantsList(roomName)
   });
 });
 

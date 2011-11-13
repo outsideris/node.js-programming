@@ -6,11 +6,11 @@ module.exports = function(app) {
   io.configure(function(){
     io.set('log level', 3);
     io.set('transports', [
-      'websocket'
-    , 'flashsocket'
-    , 'htmlfile'
-    , 'xhr-polling'
-    , 'jsonp-polling'
+        'websocket'
+      , 'flashsocket'
+      , 'htmlfile'
+      , 'xhr-polling'
+      , 'jsonp-polling'
     ]);
   });
 
