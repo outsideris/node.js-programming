@@ -1,4 +1,4 @@
-Node Programming
+Node.js Programming
 ==========================
 
 
