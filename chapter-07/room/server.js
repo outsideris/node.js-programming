@@ -98,7 +98,8 @@ var another = io.of('/another').on('connection', function(socket) {
   });
   
   var timer = setInterval(function() {
-     socket.broadcast.to('some room').emit('in room', new Date()); 
+     var time = new Date();
+     socket.broadcast.to('some room').emit('in room', time); 
   }, 2000);
 });
 

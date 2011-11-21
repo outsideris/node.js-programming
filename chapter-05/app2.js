@@ -21,9 +21,10 @@ var Tweet = {
         fs.open('./tweets.txt', 'a', 0666, function(err, fd) {
           if(err) { throw err; }
           var buffer = new Buffer(text);
-          fs.write(fd, buffer, 0, buffer.length, null, function(err) {
-            fs.close(fd, function() {
-            }); 
+          fs.write(fd, buffer, 0, buffer.length, null
+            , function(err) {
+                fs.close(fd, function() {
+                }); 
           });
         });
       });

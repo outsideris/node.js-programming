@@ -30,11 +30,15 @@ var Tweet = {
 
               isOpened = true;
               var buffer = new Buffer(text);
-              fs.write(fd, buffer, 0, buffer.length, null, function(err) {
-                fs.close(fd, function() {
-                  Tweet.isOpened = false; 
-                  fs.writeFile('./maxid.txt', data.max_id.toString(), function(err) {});
-                }); 
+              fs.write(fd, buffer, 0, buffer.length, null
+                , function(err) {
+                    fs.close(fd, function() {
+                      Tweet.isOpened = false; 
+                      fs.writeFile('./maxid.txt'
+                        , data.max_id.toString()
+                        , function(err) {}
+                      );
+                    }); 
               });
             });
           }

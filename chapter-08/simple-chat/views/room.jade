@@ -38,7 +38,9 @@
       room.on('joined', function(data) {
         if(data.isSuccess) {
           showMessage(data.nickName + '님이 입장하셨습니다.');
-          attendants.append($('<li>').attr('id', 'attendant-'+data.nickName).text(data.nickName)); 
+          attendants.append($('<li>')
+            .attr('id', 'attendant-'+data.nickName)
+            .text(data.nickName)); 
         }
       });
 
