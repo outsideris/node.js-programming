@@ -1,4 +1,4 @@
-// 리스트 4.8
+// 리스트 3.17
 var net = require('net')
   , sockets = [];
 

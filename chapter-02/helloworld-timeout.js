@@ -1,4 +1,4 @@
-// 리스트 3.2
+// 리스트 2.2
 setTimeout(function() {
   console.log('World');
 }, 2000);

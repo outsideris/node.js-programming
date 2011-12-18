@@ -29,4 +29,19 @@ var server = http.createServer(function(req, res) {
 
 server.listen(3000);
 
+io = io.listen(server);
+
+io.configure(function(){
+  io.enable('browser client etag');
+  io.set('log level', 3);
+  io.set('transports', [
+    'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+    ]);
+
+});
+
 console.log("서버가 시작되었습니다. http://localhost:3000");

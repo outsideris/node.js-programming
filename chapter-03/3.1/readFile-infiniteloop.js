@@ -1,4 +1,4 @@
-// 리스트 2.3
+// 리스트 2.4
 var fs = require('fs');
 
 fs.readFile('./test.txt', encoding='utf-8', function(err, data) {
@@ -9,3 +9,9 @@ fs.readFile('./test.txt', encoding='utf-8', function(err, data) {
 });
 
 console.log('파일의 내용 : ');
+
+while(true) {
+  process.nextTick(function() {
+    console.log('t');
+  });
+}

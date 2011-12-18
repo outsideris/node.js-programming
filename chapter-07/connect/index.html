@@ -10,8 +10,11 @@
     </div>
     <script type="text/javascript">
       window.onload = function() {
-        var socket = io.connect('http://localhost:3000');  
-          socket.on('connect', function() {
+        var socket = io.connect('http://localhost:3000', {
+            'reconnect': true
+          , 'resource': 'socket.io'
+        });  
+        socket.on('connect', function() {
             printMessage('연결되었습니다.');
         });
 

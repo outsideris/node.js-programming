@@ -1,4 +1,4 @@
-// 리스트 3.7
+// 리스트 2.7
 var server = require('http');
     
 server.createServer(function(req, res) {
@@ -7,4 +7,6 @@ server.createServer(function(req, res) {
     res.end('World\n');
   },2000);
   res.write('Hello\n');
-}).listen(3000);
+}).listen(3000, 'localhost');
+
+console.log('서버가 http://localhost:3000으로 시작되었습니다.');
