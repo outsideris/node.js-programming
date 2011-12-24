@@ -9,7 +9,7 @@
     "node": "~0.4.12"
   },
   "dependencies": {
-    "vows": "~0.5.11"
+    "vows": "~0.6.0"
   },
   "devDependencies": {}
 }

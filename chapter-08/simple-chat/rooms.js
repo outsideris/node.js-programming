@@ -22,10 +22,10 @@ module.exports = function(app) {
         if (Chat.hasRoom(data.roomName)) {
           joinedRoom = data.roomName;
           socket.join(joinedRoom);
-          socket.json.emit('joined', {
+          socket.emit('joined', {
             isSuccess:true, nickName:data.nickName
           });
-          socket.broadcast.to(joinedRoom).json.emit('joined', {
+          socket.broadcast.to(joinedRoom).emit('joined', {
             isSuccess:true, nickName:data.nickName
           });
           Chat.joinRoom(joinedRoom, data.nickName);
@@ -43,7 +43,7 @@ module.exports = function(app) {
       socket.on('leave', function(data) {
         if (joinedRoom) {
           Chat.leaveRoom(joinedRoom, data.nickName);
-          socket.broadcast.to(joinedRoom).json.emit('leaved', {
+          socket.broadcast.to(joinedRoom).emit('leaved', {
             nickName:data.nickName
           });
           socket.leave(joinedRoom);
