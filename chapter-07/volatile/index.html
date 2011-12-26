@@ -38,7 +38,11 @@
         var contents = document.getElementById('contents');
         function printMessage(msg) {
           var p = document.createElement("p");
-          p.textContent = msg;
+          if (p.textContent) {
+            p.textContent = msg;
+          } else {
+            p.innerText = msg;
+          }
           contents.appendChild(p);
         }
       };

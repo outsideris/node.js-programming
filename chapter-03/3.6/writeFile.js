@@ -1,4 +1,4 @@
-// 리스트 4.4
+// 리스트 3.9
 var fs = require('fs');
 
 fs.writeFile('./example.txt', 'Hello World', encoding='utf-8', function(err) {

@@ -43,7 +43,7 @@ var mysqlUtil = module.exports = {
                   title: 'Express'
               });
             } else {
-              mysqlutil.insertUser(user, name);
+              mysqlUtil.insertUser(user, res);
             }
       });
     }

@@ -53,9 +53,9 @@ var Chat = module.exports = {
       var rooms = this.rooms.filter(function(element) {
         return (element.name === roomName);   
       });
-      rooms[0].attendants.forEach(function(element, index) {
+      rooms[0].attendants.forEach(function(element, index, arr) {
         if (element === user) {
-          array.splice(index, 1);
+          arr.splice(index, 1);
         }
       });
     }

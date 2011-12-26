@@ -4,7 +4,7 @@ var Mongolian = require('mongolian')
   , users = db.collection('members');
 
 
-var mysqlutil = module.exports = {
+var mysqlUtil = module.exports = {
     insertUser: function(user, res) {
       users.insert({
           name: user.name
@@ -30,7 +30,7 @@ var mysqlutil = module.exports = {
             title: 'Express'
           });
         } else {
-          mysqlutil.insertUser(user, res);
+          mysqlUtil.insertUser(user, res);
         }
       });
     }

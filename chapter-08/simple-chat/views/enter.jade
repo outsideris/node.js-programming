@@ -9,8 +9,8 @@
   ul
     each room in roomList
       li= room
-        a(href='/join/' + room)
-          input(type='button', value='입장');
+        input(type='button', value='입장',
+              onclick='location.href=\'/join/' + room + '\'');
 - else
   - if (nickname === '')
     script(type='text/javascript')

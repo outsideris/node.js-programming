@@ -1,4 +1,4 @@
-// 리스트 4.3
+// 리스트 3.8
 var fs = require('fs');
 
 fs.stat('./stat.js', function(err, stats) {
