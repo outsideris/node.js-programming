@@ -52,10 +52,10 @@ io.sockets.on('connection', function(socket) {
 
   socket.on('message', function(msg) {
     console.log(msg);
-    socket.send('서버쪽 메세지 테스트');
+    socket.send('서버쪽 메시지 테스트');
   });
 
-  socket.send('send로 보내는 메세지', function() {
+  socket.send('send로 보내는 메시지', function() {
     console.log('메시지가 전달되었습니다.');
   });
 

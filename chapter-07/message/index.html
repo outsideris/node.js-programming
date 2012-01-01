@@ -17,7 +17,7 @@
         });
 
         socket.send('send로 보내는 메시지', function() {
-            printMessage('메세지가 전달되었습니다.');
+            printMessage('메시지가 전달되었습니다.');
         });
 
         socket.on('message', function(msg) {

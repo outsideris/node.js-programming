@@ -4,7 +4,7 @@ var util = require('util'),
 console.log('로그용 메시지입니다.');
 console.info('정보성 메시지입니다.');
 console.warn('경고용 메시지입니다.');
-console.error('오류메세지입니다.');
+console.error('오류메시지입니다.');
 
 util.log('로그용 메시지');
 util.debug('디버그용 메시지');

@@ -5,8 +5,7 @@
 - else
   h3 방제 : 
     span#roomName= roomName 
-    input#leave(type='button', value='나가기',
-                onclick='location.href=\'/enter\'');
+    input#leave(type='button', value='나가기')
   #chatWindow(style='width:400px; height:400px; overflow:auto; border:1px solid #000; float:left; margin-right:10px;')
     
   div(style='width:100px; height:400px; overflow:auto; border:1px solid #000;')
@@ -65,6 +64,7 @@
 
       $('#leave').click(function(e) {
         room.emit('leave', {nickName:myName});
+        location.href='/enter';
       });
     });
  
