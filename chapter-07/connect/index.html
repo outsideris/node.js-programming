@@ -1,1 +1,30 @@
-        input(type='button', value='입장', onclick='location.href="/join/' + room + '"');
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Socket.IO 예제</title>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  </head>
+
+  <body>
+    <div id="contents" style="width:300px; height:200px; overflow:auto; border:1px solid #000;">
+    </div>
+    <script type="text/javascript">
+      window.onload = function() {
+        var socket = io.connect('http://localhost:3000', {
+            'reconnect': true
+            , 'resource': 'socket.io'
+            });  
+        socket.on('connect', function() {
+            printMessage('연결되었습니다.');
+            });
+
+        var contents = document.getElementById('contents');
+        function printMessage(msg) {
+          var p = document.createElement("p");
+          p.textContent = msg;
+          contents.appendChild(p);
+        }
+      };
+    </script>
+  </body>
+</html>
