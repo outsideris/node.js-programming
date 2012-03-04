@@ -8,7 +8,7 @@ var Tweet = {
   , getTweets: function(search, callback) {
       search = encodeURIComponent(search);
     
-      fs.readFile('./maxid.txt', function(err, maxId) {
+      fs.readFile('./maxid.txt', 'utf8', function(err, maxId) {
         if (err) { Tweet.sinceId = 1; }
         else { Tweet.sinceId = maxId; }
 
@@ -16,7 +16,7 @@ var Tweet = {
           'http://search.twitter.com/search.json?q=' + search +
           '&result_type=recent' +
           '&rpp=100' +
-          '&since_id=' + this.sinceId
+          '&since_id=' + Tweet.sinceId
         ).on('complete', function(data) {
           var text = "";
           data.results.forEach(function(elem, index, array) {
@@ -28,7 +28,7 @@ var Tweet = {
             fs.open('./tweets.txt', 'a', 0666, function(err, fd) {
               if(err) { throw err; }
 
-              isOpened = true;
+              Tweet.isOpened = true;
               var buffer = new Buffer(text);
               fs.write(fd, buffer, 0, buffer.length, null
                 , function(err) {

@@ -9,7 +9,7 @@ var Tweet = {
         'http://search.twitter.com/search.json?q=' + search +
         '&result_type=recent' +
         '&rpp=100' +
-        '&since_id=' + this.sinceId
+        '&since_id=' + Tweet.sinceId
       ).on('complete', function(data) {
         console.log(data);
       });
