@@ -2,8 +2,6 @@ var net = require('net');
 
 var server = net.createServer(function(socket) {
   console.log('서버에 연결되었습니다.');
-  console.log(socket.address());
-  console.log(socket.remoteAddress);
   socket.on('end', function() {
     console.log('연결이 종료되었습니다.');
   });
