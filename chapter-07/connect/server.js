@@ -44,4 +44,12 @@ io.configure(function(){
 
 });
 
+io.sockets.on('connection', function(socket) {
+  console.log('connected');
+  socket.on('disconnect', function() {
+    console.log('Good-bye'); 
+  });
+
+});
+
 console.log("서버가 시작되었습니다. http://localhost:3000");
