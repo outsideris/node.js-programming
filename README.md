@@ -11,4 +11,5 @@ Node.js 프로그래밍 : 클라우드 컴퓨팅 시대의 고성능 자바스�
 * 이 예제는 Node.js v0.6.6 기반으로 작성되었습니다.
 * 잘못된 부분을 발견하시면 이슈에 등록해 주세요.
 
+* node 0.8.x 및 express 3.x와 관련한 오류가 발생하시는 분은 [features/node-0.8 브랜치](https://github.com/outsideris/node.js-programming/tree/features/node-0.8)를 참고해 주세요.
 
