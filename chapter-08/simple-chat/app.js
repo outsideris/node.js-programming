@@ -4,9 +4,10 @@
  */
 
 var express = require('express')
+  , http = require('http')
   , Chat = require('./chat');
 
-var app = module.exports = express.createServer();
+var app = module.exports = express();
 
 // Configuration
 
@@ -102,9 +103,10 @@ app.get('/join/:id', function(req, res) {
   });
 });
 
-app.listen(3000);
+var server = http.createServer(app);
+server.listen(3000);
 
 // Socket.io
-require('./rooms')(app);
+require('./rooms')(server);
 
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);

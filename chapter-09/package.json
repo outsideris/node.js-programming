@@ -9,7 +9,7 @@
     "node": "~0.4.10"
   },
   "dependencies": {
-    "clog": "0.0.2"
+    "clog": "0.1.6"
   },
   "devDependencies": {}
 }
