@@ -4,9 +4,10 @@
  */
 
 var express = require('express')
+  , http = require('http')
   , routes = require('./routes')
 
-var app = module.exports = express.createServer();
+var app = module.exports = express();
 
 // Configuration
 
@@ -33,5 +34,6 @@ app.get('/', routes.index);
 app.get('/join', routes.form);
 app.post('/join', routes.join);
 
-app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+var server = http.createServer(app);
+server.listen(3000);
+console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);

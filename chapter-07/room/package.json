@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "socket.io": "0.8.7"
+    "socket.io": "0.9.13"
   },
   "devDependencies": {},
   "engines": {

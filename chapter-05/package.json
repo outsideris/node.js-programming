@@ -9,8 +9,8 @@
     "node": "~v0.4.10"
   },
   "dependencies": {
-      "node-schedule": "~0.1.4"
-    , "restler": "~0.2.3"
+      "node-schedule": "~0.1.5"
+    , "restler": "~2.0.1"
   },
   "devDependencies": {}
 }

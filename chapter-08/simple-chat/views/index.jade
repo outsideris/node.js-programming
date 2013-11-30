@@ -1,15 +1,18 @@
-h2 채팅방
-form(action='/enter', method='POST')
-  label(for='nickname') 닉네임을 입력해 주세요.
-  input(type='text', id='nickname', name='nickname')
-  input(type='submit', value='입장')
+extends layout
 
-script(type='text/javascript')
-  $(document).ready(function() {
-    $('form').submit(function(e) {
-      if ($.trim($('#nickname').val()) === '') {
-        alert('닉네임을 입력해 주세요.');
-        return false;
-      }
+block contents
+  h2 채팅방
+  form(action='/enter', method='POST')
+    label(for='nickname') 닉네임을 입력해 주세요.
+    input(type='text', id='nickname', name='nickname')
+    input(type='submit', value='입장')
+
+  script(type='text/javascript')
+    $(document).ready(function() {
+      $('form').submit(function(e) {
+        if ($.trim($('#nickname').val()) === '') {
+          alert('닉네임을 입력해 주세요.');
+          return false;
+        }
+      });
     });
-  });
