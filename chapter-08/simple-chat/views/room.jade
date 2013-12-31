@@ -1,5 +1,5 @@
 - if (!isSuccess)
-  script
+  script.
     alert('방에 입장할 수 없습니다.');
     location.href = '/enter';
 - else
@@ -18,7 +18,7 @@
     input(type='text', style='width:300px;')#message
     input(type='submit', value='보내기')
 
-  script(type='text/javascript')
+  script(type='text/javascript').
     $(document).ready(function() {
       var room = io.connect('/room'); 
       var chatWindow = $('#chatWindow');
