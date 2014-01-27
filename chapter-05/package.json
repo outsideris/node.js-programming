@@ -10,7 +10,7 @@
   },
   "dependencies": {
       "node-schedule": "~0.1.5"
-    , "restler": "~2.0.1"
+    , "restler": "~3.1.0"
   },
   "devDependencies": {}
 }

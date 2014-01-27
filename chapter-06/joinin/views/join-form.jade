@@ -10,7 +10,7 @@ block contents
     input(type='text', name='email', id='email')
     input(type='submit', value='전송')
 
-  script(type='text/javascript')
+  script(type='text/javascript').
     $(document).ready(function() {
       $('#joinForm').submit(function(e) {
         if ($.trim($('#name').val()) === '' || $.trim($('#email').val()) === '') {

@@ -1,7 +1,7 @@
 var mysql = require('mysql')
   , DATABASE = 'node_test'
   , TABLE = 'members'
-  , client = mysql.createClient({
+  , client = mysql.createConnection({
       user: 'node'
     , password: 'pass'
   });

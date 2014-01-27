@@ -7,7 +7,7 @@ block contents
     input(type='text', id='nickname', name='nickname')
     input(type='submit', value='입장')
 
-  script(type='text/javascript')
+  script(type='text/javascript').
     $(document).ready(function() {
       $('form').submit(function(e) {
         if ($.trim($('#nickname').val()) === '') {

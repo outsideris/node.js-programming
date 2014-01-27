@@ -13,13 +13,13 @@ block contents
       each room in roomList
         li= room
           input(type='button', value='입장',
-                onclick='location.href=\'/join/' + room + '\'');
+                onclick='location.href=\'/join/' + room + '\'')
   - else
     - if (nickname === '')
-      script(type='text/javascript')
+      script(type='text/javascript').
         alert('잘못된 닉네임입니다.');
         history.go(-1);
     - else
-      script(type='text/javascript')
+      script(type='text/javascript').
         alert('사용중인 닉네임입니다.');
         history.go(-1);
