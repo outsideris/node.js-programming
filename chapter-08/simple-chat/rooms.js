@@ -1,17 +1,9 @@
 var Chat = require('./chat');
 
-module.exports = function(app) {
-  var io = require('socket.io').listen(app);
-  
-  io.configure(function(){
-    io.set('log level', 3);
-    io.set('transports', [
-        'websocket'
-      , 'flashsocket'
-      , 'htmlfile'
-      , 'xhr-polling'
-      , 'jsonp-polling'
-    ]);
+module.exports = function(server) {
+  var io = require('socket.io')(server, {
+    transports: ['polling', 'websocket'],
+    allowUpgrades: true
   });
 
   var Room = io

@@ -3,34 +3,28 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , http = require('http')
+var http = require('http')
+  , path = require('path')
+  , express = require('express')
+  , cookieParser = require('cookie-parser')
+  , bodyParser = require('body-parser')
+  , session = require('express-session')
   , Chat = require('./chat');
 
 var app = module.exports = express();
 
 // Configuration
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.bodyParser());
-  app.use(express.cookieParser());
-  app.use(express.session({secret: 'secret key'}));
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({secret: 'secret key'}))
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-});
-
-app.configure('production', function(){
-  app.use(express.errorHandler()); 
-});
 
 // Routes
-
 app.get('/', function(req, res){
   res.render('index');
 });
@@ -103,10 +97,38 @@ app.get('/join/:id', function(req, res) {
   });
 });
 
+// error handlers
+// 404 오류
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
+
+
 var server = http.createServer(app);
 server.listen(3000);
+server.on('listening', function() {
+  console.log("Express server listening on port %d in %s mode", server.address().port, app.get('env'));
+});
 
 // Socket.io
 require('./rooms')(server);
-
-console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
